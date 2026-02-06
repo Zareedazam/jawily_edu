@@ -1,4 +1,3 @@
-import Link from "next/link";
 export default function Page() {
   return (
     <div className="min-h-screen bg-white text-black">
@@ -23,27 +22,15 @@ export default function Page() {
               Call us: +91-75188-38702
             </span>
 
-       {/* Equip Now → APPLY */}
-            <Link
-              href="/apply"
-              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
-            >
+            <button className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold">
               Equip Now
-            </Link>
+            </button>
 
-            {/* Login → LOGIN */}
-            <Link
-              href="/login"
-              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
-            >
+            <button className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold">
               Login
-            </Link>
+            </button>
 
-            {/* Apply Now → APPLY */}
-            <Link
-              href="/apply"
-              className="px-4 py-2 rounded-full bg-black text-white hover:opacity-90 text-sm font-semibold"
-            >
+            <button className="px-4 py-2 rounded-full bg-black text-white hover:opacity-90 text-sm font-semibold">
               Apply Now
             </button>
           </div>
