@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <div className="min-h-screen bg-white text-black">
@@ -16,23 +18,35 @@ export default function Page() {
             <a className="hover:text-black" href="/contact">Contact</a>
           </nav>
 
-          {/* Right */}
+          {/* Right (UPDATED) */}
           <div className="flex items-center gap-2 flex-wrap justify-end">
             <span className="hidden lg:block text-sm font-semibold text-black/60">
               Call us: +91-75188-38702
             </span>
 
-            <button className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold">
+            {/* Equip Now -> /apply */}
+            <Link
+              href="/apply"
+              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
+            >
               Equip Now
-            </button>
+            </Link>
 
-            <button className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold">
+            {/* Login -> /login */}
+            <Link
+              href="/login"
+              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
+            >
               Login
-            </button>
+            </Link>
 
-            <button className="px-4 py-2 rounded-full bg-black text-white hover:opacity-90 text-sm font-semibold">
+            {/* Apply Now -> /apply */}
+            <Link
+              href="/apply"
+              className="px-4 py-2 rounded-full bg-black text-white hover:opacity-90 text-sm font-semibold"
+            >
               Apply Now
-            </button>
+            </Link>
           </div>
         </div>
       </header>
