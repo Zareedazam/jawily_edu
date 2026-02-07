@@ -1,117 +1,165 @@
-import Link from "next/link";
+"use client";
+
+import React, { useMemo, useState } from "react";
+
+type Tab =
+  | "Courses"
+  | "Scholarship"
+  | "Universities"
+  | "Accommodation"
+  | "Education Loan";
 
 export default function Page() {
+  const tabs: Tab[] = useMemo(
+    () => ["Courses", "Scholarship", "Universities", "Accommodation", "Education Loan"],
+    []
+  );
+
+  const [activeTab, setActiveTab] = useState<Tab>("Courses");
+
+  // ✅ Dynamic hero content (same logic, but white Uber UI)
+  const hero = useMemo(() => {
+    switch (activeTab) {
+      case "Accommodation":
+        return {
+          badge: "Verified stays near campus",
+          title: "Find Student Accommodation Fast",
+          desc: "Search by city or university. Compare verified properties, prices, and move-in dates.",
+          primary: "Get Free Shortlist",
+          secondary: "Talk to Expert",
+        };
+      case "Education Loan":
+        return {
+          badge: "Quick eligibility check",
+          title: "Education Loan Made Simple",
+          desc: "Check eligibility, compare lenders, and get documentation support with expert help.",
+          primary: "Check Eligibility",
+          secondary: "Request Call Back",
+        };
+      case "Universities":
+        return {
+          badge: "Search by name or location",
+          title: "Find the Right University",
+          desc: "Explore universities by country, city, or name. Get rankings, fees, intakes, and scholarships.",
+          primary: "Explore Universities",
+          secondary: "Book Consultation",
+        };
+      case "Scholarship":
+        return {
+          badge: "Funding opportunities",
+          title: "Find Scholarships That Fit You",
+          desc: "Search scholarships by country and keyword. Get guidance on eligibility and documents.",
+          primary: "Find Scholarships",
+          secondary: "Talk to Advisor",
+        };
+      default:
+        return {
+          badge: "Study abroad made simple",
+          title: "Study Abroad Consultants",
+          desc: "Counselling, shortlisting, applications, documents and visa guidance — everything in one place.",
+          primary: "Book Free Consultation",
+          secondary: "Download Guide",
+        };
+    }
+  }, [activeTab]);
+
   return (
     <div className="min-h-screen bg-white text-black">
       {/* HEADER */}
       <header className="bg-black sticky top-0 z-50">
-  <div className="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
-    
-    <div className="text-xl font-semibold text-white">
-      Jawily
-    </div>
+        <div className="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
+          <div className="text-xl font-semibold text-white">Jawily</div>
 
-    <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
-      <a className="hover:opacity-70 transition" href="/courses">Courses</a>
-      <a className="hover:opacity-70 transition" href="/universities">Universities</a>
-      <a className="hover:opacity-70 transition" href="/accommodation">Accommodation</a>
-      <a className="hover:opacity-70 transition" href="/education-loans">Education Loans</a>
-      <a className="hover:opacity-70 transition" href="/services">Services</a>
-    </nav>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
+            <a className="hover:opacity-70 transition" href="/courses">
+              Courses
+            </a>
+            <a className="hover:opacity-70 transition" href="/universities">
+              Universities
+            </a>
+            <a className="hover:opacity-70 transition" href="/accommodation">
+              Accommodation
+            </a>
+            <a className="hover:opacity-70 transition" href="/education-loans">
+              Education Loans
+            </a>
+            <a className="hover:opacity-70 transition" href="/services">
+              Services
+            </a>
+          </nav>
 
-    <div className="flex items-center gap-4">
-      <a className="text-sm text-white hover:opacity-70 transition" href="/login">
-        Login
-      </a>
-      <a
-        href="/apply"
-        className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black hover:bg-gray-200 transition"
-      >
-        Apply Now
-      </a>
-    </div>
+          <div className="flex items-center gap-4">
+            <a className="text-sm text-white hover:opacity-70 transition" href="/login">
+              Login
+            </a>
+            <a
+              href="/apply"
+              className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black hover:bg-gray-200 transition"
+            >
+              Apply Now
+            </a>
+          </div>
+        </div>
+      </header>
 
-  </div>
-</header>
+      {/* ✅ HERO (WHITE UBER STYLE) */}
+      <section className="relative overflow-hidden border-b bg-white">
+        {/* light subtle background (optional, very soft) */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.06),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(0,0,0,0.04),transparent_50%)]" />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.08),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(0,0,0,0.06),transparent_45%)]" />
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20 relative">
-          {/* top pills + badge */}
-          <div className="flex items-start justify-between gap-6">
-            <div className="flex flex-wrap gap-3">
-              {["Courses", "Scholarship", "Universities", "Website Search"].map(
-                (t) => (
-                  <button
-                    key={t}
-                    className="bg-white border border-black/15 text-black px-5 py-2 rounded-full hover:border-black/30 text-sm font-semibold"
-                  >
-                    {t}
-                  </button>
-                )
-              )}
-            </div>
-
-            <div className="hidden md:flex items-center gap-3">
-              <div className="text-6xl font-black leading-none">17</div>
-              <div className="leading-tight">
-                <div className="text-lg font-black">YEARS</div>
-                <div className="text-xs text-black/60 uppercase tracking-wide">
-                  of service excellence
-                </div>
+        <div className="relative mx-auto max-w-6xl px-6 py-12 md:py-16">
+          {/* Top badge + actions */}
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center rounded-full border border-black/15 bg-white px-3 py-1 text-xs font-semibold text-black">
+                {hero.badge}
               </div>
+
+              <h1 className="mt-4 text-4xl md:text-6xl font-black tracking-tight leading-[1.05] text-black">
+                {hero.title}
+              </h1>
+
+              <p className="mt-4 text-base md:text-lg text-black/70">
+                {hero.desc}
+              </p>
+            </div>
+
+            <div className="flex gap-3 md:mt-1 flex-wrap">
+              {/* Secondary */}
+              <button className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black border border-black/15 hover:border-black/30">
+                {hero.secondary}
+              </button>
+              {/* Primary */}
+              <button className="rounded-full bg-black px-5 py-2 text-sm font-semibold text-white hover:opacity-90">
+                {hero.primary}
+              </button>
             </div>
           </div>
 
-          {/* search row */}
-          <div className="mt-7 flex flex-col lg:flex-row items-stretch gap-3">
-            <div className="bg-white border border-black/15 rounded-2xl overflow-hidden flex flex-col md:flex-row w-full">
-              <select className="w-full md:w-[260px] px-4 py-3 outline-none bg-transparent text-sm font-semibold">
-                <option>Normal</option>
-                <option>UK</option>
-                <option>Canada</option>
-                <option>Australia</option>
-                <option>USA</option>
-              </select>
-
-              <div className="hidden md:block w-px bg-black/10" />
-
-              <select className="w-full md:w-[320px] px-4 py-3 outline-none bg-transparent text-sm font-semibold">
-                <option>Normal</option>
-                <option>Bachelor</option>
-                <option>Master</option>
-                <option>PhD</option>
-              </select>
-
-              <button className="bg-black hover:opacity-90 text-white px-6 py-3 font-semibold">
-                Search
-              </button>
-            </div>
-
-            <button className="bg-black hover:opacity-90 text-white px-7 py-3 rounded-2xl font-semibold whitespace-nowrap">
-              Download Guide
-            </button>
+          {/* Tabs (Uber style pills) */}
+          <div className="mt-8 flex flex-wrap gap-3">
+            {tabs.map((t) => {
+              const isActive = t === activeTab;
+              return (
+                <button
+                  key={t}
+                  onClick={() => setActiveTab(t)}
+                  className={[
+                    "rounded-full px-5 py-2 text-sm font-semibold transition border",
+                    isActive
+                      ? "border-black bg-black text-white"
+                      : "border-black/20 bg-white text-black hover:bg-black/[0.04]",
+                  ].join(" ")}
+                >
+                  {t}
+                </button>
+              );
+            })}
           </div>
 
-          {/* hero text */}
-          <div className="mt-10 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.02]">
-              Study Abroad Consultants
-            </h1>
-            <p className="text-black/70 mt-4 text-base md:text-lg">
-              Counselling, shortlisting, applications, documents and visa guidance —
-              everything in one place.
-            </p>
-
-            <div className="mt-7 flex gap-3 flex-wrap">
-              <button className="px-6 py-3 rounded-full bg-black text-white hover:opacity-90 font-semibold">
-                Book Free Consultation
-              </button>
-              <button className="px-6 py-3 rounded-full border border-black/15 hover:border-black/30 bg-white font-semibold">
-                View Universities
-              </button>
-            </div>
+          {/* Search bar area */}
+          <div className="mt-6 rounded-2xl bg-white border border-black/15 p-4 shadow-sm md:p-5">
+            <SearchArea activeTab={activeTab} />
           </div>
         </div>
       </section>
@@ -193,9 +241,7 @@ export default function Page() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
             <div>
               <h2 className="text-3xl font-black tracking-tight">Services</h2>
-              <p className="text-black/70 mt-2">
-                Choose a plan. Get guided support.
-              </p>
+              <p className="text-black/70 mt-2">Choose a plan. Get guided support.</p>
             </div>
             <button className="px-5 py-2 rounded-full border border-black/15 hover:border-black/30 font-semibold">
               View All Services
@@ -215,9 +261,21 @@ export default function Page() {
       <section id="stories" className="mx-auto max-w-6xl px-6 py-14">
         <h2 className="text-3xl font-black tracking-tight">Student Stories</h2>
         <div className="grid md:grid-cols-3 gap-4 mt-8">
-          <Quote name="Ayesha" course="MBA - UK" text="Counselling was smooth and fast. Got shortlist in 2 days." />
-          <Quote name="Rahul" course="Engineering - Canada" text="Document tracking made everything clear and simple." />
-          <Quote name="Sara" course="Masters - Australia" text="The step-by-step process feels premium and easy." />
+          <Quote
+            name="Ayesha"
+            course="MBA - UK"
+            text="Counselling was smooth and fast. Got shortlist in 2 days."
+          />
+          <Quote
+            name="Rahul"
+            course="Engineering - Canada"
+            text="Document tracking made everything clear and simple."
+          />
+          <Quote
+            name="Sara"
+            course="Masters - Australia"
+            text="The step-by-step process feels premium and easy."
+          />
         </div>
       </section>
 
@@ -265,16 +323,29 @@ export default function Page() {
             <p className="text-black/60 mt-2">Study abroad made simple.</p>
           </div>
 
-          <FooterCol title="Services" items={["Free Service", "Premium", "Oxbridge", "Medicine"]} />
-          <FooterCol title="Study Options" items={["Foundation", "Undergraduate", "Postgraduate", "PhD"]} />
-          <FooterCol title="Info" items={["Rankings", "Scholarships", "Deadlines", "Contact"]} />
+          <FooterCol
+            title="Services"
+            items={["Free Service", "Premium", "Oxbridge", "Medicine"]}
+          />
+          <FooterCol
+            title="Study Options"
+            items={["Foundation", "Undergraduate", "Postgraduate", "PhD"]}
+          />
+          <FooterCol
+            title="Info"
+            items={["Rankings", "Scholarships", "Deadlines", "Contact"]}
+          />
         </div>
 
         <div className="mx-auto max-w-6xl px-6 py-6 text-xs text-black/50 border-t flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Jawily. All rights reserved.</p>
           <div className="flex gap-4">
-            <a className="hover:text-black" href="#">Privacy</a>
-            <a className="hover:text-black" href="#">Terms</a>
+            <a className="hover:text-black" href="#">
+              Privacy
+            </a>
+            <a className="hover:text-black" href="#">
+              Terms
+            </a>
           </div>
         </div>
       </footer>
@@ -282,7 +353,192 @@ export default function Page() {
   );
 }
 
-/* components */
+/* ===================== HERO SEARCH (DYNAMIC) ===================== */
+
+function SearchArea({ activeTab }: { activeTab: Tab }) {
+  const labelCls = "text-xs font-semibold text-black/70";
+  const inputCls =
+    "mt-1 w-full rounded-xl border border-black/15 px-3 py-2.5 text-sm outline-none focus:border-black/40";
+  const selectCls =
+    "mt-1 w-full rounded-xl border border-black/15 bg-white px-3 py-2.5 text-sm outline-none focus:border-black/40";
+
+  const onSearch = () => {
+    alert(`Searching in: ${activeTab}`);
+  };
+
+  const GoBtn = () => (
+    <button
+      onClick={onSearch}
+      className="w-full rounded-xl bg-black px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+    >
+      Go
+    </button>
+  );
+
+  if (activeTab === "Accommodation") {
+    return (
+      <div className="grid gap-3 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-5">
+          <div className={labelCls}>City / University</div>
+          <input className={inputCls} placeholder="Search by city, university, or property" />
+        </div>
+
+        <div className="md:col-span-3">
+          <div className={labelCls}>Move-in Month</div>
+          <select className={selectCls} defaultValue="Any">
+            <option>Any</option>
+            <option>Jan</option><option>Feb</option><option>Mar</option><option>Apr</option>
+            <option>May</option><option>Jun</option><option>Jul</option><option>Aug</option>
+            <option>Sep</option><option>Oct</option><option>Nov</option><option>Dec</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-3">
+          <div className={labelCls}>Budget</div>
+          <select className={selectCls} defaultValue="Any">
+            <option>Any</option>
+            <option>Under £150/week</option>
+            <option>£150–£250/week</option>
+            <option>£250–£400/week</option>
+            <option>£400+/week</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-1">
+          <GoBtn />
+        </div>
+      </div>
+    );
+  }
+
+  if (activeTab === "Education Loan") {
+    return (
+      <div className="grid gap-3 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-4">
+          <div className={labelCls}>Country</div>
+          <select className={selectCls} defaultValue="UK">
+            <option>UK</option>
+            <option>USA</option>
+            <option>Canada</option>
+            <option>Australia</option>
+            <option>Germany</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-4">
+          <div className={labelCls}>Loan Amount</div>
+          <input className={inputCls} placeholder="e.g. 20,00,000" />
+        </div>
+
+        <div className="md:col-span-3">
+          <div className={labelCls}>Co-applicant</div>
+          <select className={selectCls} defaultValue="Yes">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-1">
+          <GoBtn />
+        </div>
+
+        <div className="md:col-span-12 mt-2 rounded-xl border border-black/10 bg-black/[0.02] p-3 text-xs text-black/60">
+          Tip: Eligibility depends on university, course, collateral, and income.
+        </div>
+      </div>
+    );
+  }
+
+  if (activeTab === "Universities") {
+    return (
+      <div className="grid gap-3 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-8">
+          <div className={labelCls}>University Name / Location</div>
+          <input className={inputCls} placeholder="Search by university name or location" />
+        </div>
+
+        <div className="md:col-span-3">
+          <div className={labelCls}>Level</div>
+          <select className={selectCls} defaultValue="Any">
+            <option>Any</option>
+            <option>Foundation</option>
+            <option>Undergraduate</option>
+            <option>Postgraduate</option>
+            <option>PhD</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-1">
+          <GoBtn />
+        </div>
+      </div>
+    );
+  }
+
+  if (activeTab === "Scholarship") {
+    return (
+      <div className="grid gap-3 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-5">
+          <div className={labelCls}>Country</div>
+          <select className={selectCls} defaultValue="UK">
+            <option>UK</option>
+            <option>USA</option>
+            <option>Canada</option>
+            <option>Australia</option>
+            <option>Germany</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-6">
+          <div className={labelCls}>Keyword</div>
+          <input className={inputCls} placeholder="e.g. STEM, MBA, Merit-based" />
+        </div>
+
+        <div className="md:col-span-1">
+          <GoBtn />
+        </div>
+      </div>
+    );
+  }
+
+  // Courses (default)
+  return (
+    <div className="grid gap-3 md:grid-cols-12 md:items-end">
+      <div className="md:col-span-5">
+        <div className={labelCls}>Country</div>
+        <select className={selectCls} defaultValue="UK">
+          <option>UK</option>
+          <option>USA</option>
+          <option>Canada</option>
+          <option>Australia</option>
+          <option>Germany</option>
+        </select>
+      </div>
+
+      <div className="md:col-span-5">
+        <div className={labelCls}>Course / Keyword</div>
+        <input className={inputCls} placeholder="e.g. Computer Science" />
+      </div>
+
+      <div className="md:col-span-1">
+        <div className={labelCls}>Level</div>
+        <select className={selectCls} defaultValue="Any">
+          <option>Any</option>
+          <option>Foundation</option>
+          <option>Undergraduate</option>
+          <option>Postgraduate</option>
+          <option>PhD</option>
+        </select>
+      </div>
+
+      <div className="md:col-span-1">
+        <GoBtn />
+      </div>
+    </div>
+  );
+}
+
+/* ===================== REST COMPONENTS ===================== */
 
 function IconCard({ title }: { title: string }) {
   return (
