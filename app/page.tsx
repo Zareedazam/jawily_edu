@@ -3,53 +3,36 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* SINGLE HEADER */}
-      <header className="border-b bg-white sticky top-0 z-50">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
-          {/* Left */}
-          <div className="text-2xl font-black tracking-tight">Jawily</div>
+      {/* HEADER */}
+      <header className="bg-black sticky top-0 z-50">
+  <div className="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
+    
+    <div className="text-xl font-semibold text-white">
+      Jawily
+    </div>
 
-          {/* Center */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-black/70">
-            <a className="hover:text-black" href="/courses">Courses</a>
-            <a className="hover:text-black" href="/universities">Universities</a>
-            <a className="hover:text-black" href="/services">Services</a>
-            <a className="hover:text-black" href="/stories">Stories</a>
-            <a className="hover:text-black" href="/contact">Contact</a>
-          </nav>
+    <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
+      <a className="hover:opacity-70 transition" href="/courses">Courses</a>
+      <a className="hover:opacity-70 transition" href="/universities">Universities</a>
+      <a className="hover:opacity-70 transition" href="/accommodation">Accommodation</a>
+      <a className="hover:opacity-70 transition" href="/education-loans">Education Loans</a>
+      <a className="hover:opacity-70 transition" href="/services">Services</a>
+    </nav>
 
-          {/* Right (UPDATED) */}
-          <div className="flex items-center gap-2 flex-wrap justify-end">
-            <span className="hidden lg:block text-sm font-semibold text-black/60">
-              Call us: +91-75188-38702
-            </span>
+    <div className="flex items-center gap-4">
+      <a className="text-sm text-white hover:opacity-70 transition" href="/login">
+        Login
+      </a>
+      <a
+        href="/apply"
+        className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black hover:bg-gray-200 transition"
+      >
+        Apply Now
+      </a>
+    </div>
 
-            {/* Equip Now -> /apply */}
-            <Link
-              href="/apply"
-              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
-            >
-              Equip Now
-            </Link>
-
-            {/* Login -> /login */}
-            <Link
-              href="/login"
-              className="px-4 py-2 rounded-full border border-black/15 hover:border-black/30 text-sm font-semibold"
-            >
-              Login
-            </Link>
-
-            {/* Apply Now -> /apply */}
-            <Link
-              href="/apply"
-              className="px-4 py-2 rounded-full bg-black text-white hover:opacity-90 text-sm font-semibold"
-            >
-              Apply Now
-            </Link>
-          </div>
-        </div>
-      </header>
+  </div>
+</header>
 
       {/* HERO */}
       <section className="relative overflow-hidden border-b">
