@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Link from "next/link";
 
 type Tab =
   | "Courses"
@@ -11,13 +12,18 @@ type Tab =
 
 export default function Page() {
   const tabs: Tab[] = useMemo(
-    () => ["Courses", "Scholarship", "Universities", "Accommodation", "Education Loan"],
+    () => [
+      "Courses",
+      "Scholarship",
+      "Universities",
+      "Accommodation",
+      "Education Loan",
+    ],
     []
   );
 
   const [activeTab, setActiveTab] = useState<Tab>("Courses");
 
-  // ✅ Dynamic hero content (same logic, but white Uber UI)
   const hero = useMemo(() => {
     switch (activeTab) {
       case "Accommodation":
@@ -68,47 +74,53 @@ export default function Page() {
       {/* HEADER */}
       <header className="bg-black sticky top-0 z-50">
         <div className="mx-auto max-w-6xl px-6 py-3 flex items-center justify-between">
-          <div className="text-xl font-semibold text-white">Jawily</div>
+          <Link href="/" className="text-xl font-semibold text-white">
+            Jawily
+          </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
-            <a className="hover:opacity-70 transition" href="/courses">
+            <Link className="hover:opacity-70 transition" href="/courses">
               Courses
-            </a>
-            <a className="hover:opacity-70 transition" href="/universities">
+            </Link>
+            <Link className="hover:opacity-70 transition" href="/universities">
               Universities
-            </a>
-            <a className="hover:opacity-70 transition" href="/accommodation">
+            </Link>
+            <Link className="hover:opacity-70 transition" href="/accommodation">
               Accommodation
-            </a>
-            <a className="hover:opacity-70 transition" href="/education-loans">
+            </Link>
+            <Link
+              className="hover:opacity-70 transition"
+              href="/education-loans"
+            >
               Education Loans
-            </a>
-            <a className="hover:opacity-70 transition" href="/services">
+            </Link>
+            <Link className="hover:opacity-70 transition" href="/services">
               Services
-            </a>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
-            <a className="text-sm text-white hover:opacity-70 transition" href="/login">
+            <Link
+              className="text-sm text-white hover:opacity-70 transition"
+              href="/login"
+            >
               Login
-            </a>
-            <a
+            </Link>
+            <Link
               href="/apply"
               className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black hover:bg-gray-200 transition"
             >
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
       </header>
 
-      {/* ✅ HERO (WHITE UBER STYLE) */}
+      {/* HERO */}
       <section className="relative overflow-hidden border-b bg-white">
-        {/* light subtle background (optional, very soft) */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.06),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(0,0,0,0.04),transparent_50%)]" />
 
         <div className="relative mx-auto max-w-6xl px-6 py-12 md:py-16">
-          {/* Top badge + actions */}
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="max-w-2xl">
               <div className="inline-flex items-center rounded-full border border-black/15 bg-white px-3 py-1 text-xs font-semibold text-black">
@@ -125,18 +137,16 @@ export default function Page() {
             </div>
 
             <div className="flex gap-3 md:mt-1 flex-wrap">
-              {/* Secondary */}
               <button className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black border border-black/15 hover:border-black/30">
                 {hero.secondary}
               </button>
-              {/* Primary */}
               <button className="rounded-full bg-black px-5 py-2 text-sm font-semibold text-white hover:opacity-90">
                 {hero.primary}
               </button>
             </div>
           </div>
 
-          {/* Tabs (Uber style pills) */}
+          {/* Tabs */}
           <div className="mt-8 flex flex-wrap gap-3">
             {tabs.map((t) => {
               const isActive = t === activeTab;
@@ -157,7 +167,6 @@ export default function Page() {
             })}
           </div>
 
-          {/* Search bar area */}
           <div className="mt-6 rounded-2xl bg-white border border-black/15 p-4 shadow-sm md:p-5">
             <SearchArea activeTab={activeTab} />
           </div>
@@ -186,9 +195,12 @@ export default function Page() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <button className="px-6 py-3 rounded-full border border-black/15 hover:border-black/30 font-semibold">
+          <Link
+            href="/courses"
+            className="px-6 py-3 rounded-full border border-black/15 hover:border-black/30 font-semibold"
+          >
             View All Courses
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -208,10 +220,10 @@ export default function Page() {
           </div>
 
           <div className="grid md:grid-cols-4 gap-4 mt-10">
-            <SmallTile title="SEE ALL UNIVERSITIES" />
-            <SmallTile title="PATHWAY" />
-            <SmallTile title="LANGUAGE SCHOOL" />
-            <SmallTile title="A-LEVEL / BOARDING" />
+            <SmallTile title="SEE ALL UNIVERSITIES" href="/universities" />
+            <SmallTile title="PATHWAY" href="/pathway" />
+            <SmallTile title="LANGUAGE SCHOOL" href="/language-school" />
+            <SmallTile title="A-LEVEL / BOARDING" href="/a-level-boarding" />
           </div>
         </div>
       </section>
@@ -241,18 +253,23 @@ export default function Page() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
             <div>
               <h2 className="text-3xl font-black tracking-tight">Services</h2>
-              <p className="text-black/70 mt-2">Choose a plan. Get guided support.</p>
+              <p className="text-black/70 mt-2">
+                Choose a plan. Get guided support.
+              </p>
             </div>
-            <button className="px-5 py-2 rounded-full border border-black/15 hover:border-black/30 font-semibold">
+            <Link
+              href="/services"
+              className="px-5 py-2 rounded-full border border-black/15 hover:border-black/30 font-semibold"
+            >
               View All Services
-            </button>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-4 gap-4 mt-10">
-            <ServiceCard title="Free Service" tag="100% Free" />
-            <ServiceCard title="Premium Service" tag="Fast Track" />
-            <ServiceCard title="Oxbridge Service" tag="Top Guidance" />
-            <ServiceCard title="Medicine Service" tag="Specialist" />
+            <ServiceCard title="Free Service" tag="100% Free" href="/free-service" />
+            <ServiceCard title="Premium Service" tag="Fast Track" href="/premium" />
+            <ServiceCard title="Oxbridge Service" tag="Top Guidance" href="/oxbridge" />
+            <ServiceCard title="Medicine Service" tag="Specialist" href="/medicine" />
           </div>
         </div>
       </section>
@@ -289,8 +306,8 @@ export default function Page() {
         <div className="mt-14">
           <h2 className="text-3xl font-black tracking-tight">Studying Abroad</h2>
           <div className="grid md:grid-cols-2 gap-4 mt-6">
-            <BlogCard title="Choosing the Right Course" />
-            <BlogCard title="Top 10 Universities to Apply" />
+            <BlogCard title="Choosing the Right Course" href="/blog/choosing-the-right-course" />
+            <BlogCard title="Top 10 Universities to Apply" href="/blog/top-10-universities" />
           </div>
         </div>
       </section>
@@ -305,12 +322,18 @@ export default function Page() {
             </p>
           </div>
           <div className="flex gap-3 flex-wrap">
-            <button className="px-6 py-3 rounded-full bg-white text-black hover:bg-white/90 font-semibold">
+            <Link
+              href="/consultation"
+              className="px-6 py-3 rounded-full bg-white text-black hover:bg-white/90 font-semibold"
+            >
               Book Free Consultation
-            </button>
-            <button className="px-6 py-3 rounded-full border border-white/25 hover:border-white/50 font-semibold">
+            </Link>
+            <Link
+              href="/contact"
+              className="px-6 py-3 rounded-full border border-white/25 hover:border-white/50 font-semibold"
+            >
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -325,27 +348,42 @@ export default function Page() {
 
           <FooterCol
             title="Services"
-            items={["Free Service", "Premium", "Oxbridge", "Medicine"]}
+            items={[
+              { label: "Free Service", href: "/free-service" },
+              { label: "Premium", href: "/premium" },
+              { label: "Oxbridge", href: "/oxbridge" },
+              { label: "Medicine", href: "/medicine" },
+            ]}
           />
           <FooterCol
             title="Study Options"
-            items={["Foundation", "Undergraduate", "Postgraduate", "PhD"]}
+            items={[
+              { label: "Foundation", href: "/foundation" },
+              { label: "Undergraduate", href: "/undergraduate" },
+              { label: "Postgraduate", href: "/postgraduate" },
+              { label: "PhD", href: "/phd" },
+            ]}
           />
           <FooterCol
             title="Info"
-            items={["Rankings", "Scholarships", "Deadlines", "Contact"]}
+            items={[
+              { label: "Rankings", href: "/rankings" },
+              { label: "Scholarships", href: "/scholarships" },
+              { label: "Deadlines", href: "/deadlines" },
+              { label: "Contact", href: "/contact" },
+            ]}
           />
         </div>
 
         <div className="mx-auto max-w-6xl px-6 py-6 text-xs text-black/50 border-t flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Jawily. All rights reserved.</p>
           <div className="flex gap-4">
-            <a className="hover:text-black" href="#">
+            <Link className="hover:text-black" href="/privacy">
               Privacy
-            </a>
-            <a className="hover:text-black" href="#">
+            </Link>
+            <Link className="hover:text-black" href="/terms">
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
@@ -380,16 +418,28 @@ function SearchArea({ activeTab }: { activeTab: Tab }) {
       <div className="grid gap-3 md:grid-cols-12 md:items-end">
         <div className="md:col-span-5">
           <div className={labelCls}>City / University</div>
-          <input className={inputCls} placeholder="Search by city, university, or property" />
+          <input
+            className={inputCls}
+            placeholder="Search by city, university, or property"
+          />
         </div>
 
         <div className="md:col-span-3">
           <div className={labelCls}>Move-in Month</div>
           <select className={selectCls} defaultValue="Any">
             <option>Any</option>
-            <option>Jan</option><option>Feb</option><option>Mar</option><option>Apr</option>
-            <option>May</option><option>Jun</option><option>Jul</option><option>Aug</option>
-            <option>Sep</option><option>Oct</option><option>Nov</option><option>Dec</option>
+            <option>Jan</option>
+            <option>Feb</option>
+            <option>Mar</option>
+            <option>Apr</option>
+            <option>May</option>
+            <option>Jun</option>
+            <option>Jul</option>
+            <option>Aug</option>
+            <option>Sep</option>
+            <option>Oct</option>
+            <option>Nov</option>
+            <option>Dec</option>
           </select>
         </div>
 
@@ -454,7 +504,10 @@ function SearchArea({ activeTab }: { activeTab: Tab }) {
       <div className="grid gap-3 md:grid-cols-12 md:items-end">
         <div className="md:col-span-8">
           <div className={labelCls}>University Name / Location</div>
-          <input className={inputCls} placeholder="Search by university name or location" />
+          <input
+            className={inputCls}
+            placeholder="Search by university name or location"
+          />
         </div>
 
         <div className="md:col-span-3">
@@ -501,7 +554,6 @@ function SearchArea({ activeTab }: { activeTab: Tab }) {
     );
   }
 
-  // Courses (default)
   return (
     <div className="grid gap-3 md:grid-cols-12 md:items-end">
       <div className="md:col-span-5">
@@ -552,12 +604,15 @@ function IconCard({ title }: { title: string }) {
   );
 }
 
-function SmallTile({ title }: { title: string }) {
+function SmallTile({ title, href }: { title: string; href: string }) {
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-6 text-center hover:border-black/25 transition">
+    <Link
+      href={href}
+      className="rounded-2xl border border-black/10 bg-white p-6 text-center hover:border-black/25 transition block"
+    >
       <div className="font-black">{title}</div>
       <p className="text-black/60 text-sm mt-2">View details</p>
-    </div>
+    </Link>
   );
 }
 
@@ -570,17 +625,31 @@ function StatCard({ big, small }: { big: string; small: string }) {
   );
 }
 
-function ServiceCard({ title, tag }: { title: string; tag: string }) {
+function ServiceCard({
+  title,
+  tag,
+  href,
+}: {
+  title: string;
+  tag: string;
+  href: string;
+}) {
   return (
     <div className="rounded-2xl border border-black/10 bg-white p-6 hover:border-black/25 transition">
       <div className="inline-flex text-xs px-3 py-1 rounded-full border border-black/15 text-black/70 font-semibold">
         {tag}
       </div>
       <h3 className="text-lg font-black mt-4">{title}</h3>
-      <p className="text-black/60 text-sm mt-2">Guided support with clear steps.</p>
-      <button className="mt-5 text-sm font-semibold underline underline-offset-4">
+      <p className="text-black/60 text-sm mt-2">
+        Guided support with clear steps.
+      </p>
+
+      <Link
+        href={href}
+        className="mt-5 inline-block text-sm font-semibold underline underline-offset-4"
+      >
         View details
-      </button>
+      </Link>
     </div>
   );
 }
@@ -615,13 +684,19 @@ function ListBox({ title }: { title: string }) {
     <div className="rounded-2xl border border-black/10 p-6 hover:border-black/25 transition">
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-black">{title}</h3>
-        <button className="text-sm font-semibold underline underline-offset-4">
+        <Link
+          href="/news"
+          className="text-sm font-semibold underline underline-offset-4"
+        >
           View All
-        </button>
+        </Link>
       </div>
       <div className="mt-5 space-y-4">
         {items.map((t, i) => (
-          <div key={i} className="border-b border-black/10 pb-4 last:border-b-0 last:pb-0">
+          <div
+            key={i}
+            className="border-b border-black/10 pb-4 last:border-b-0 last:pb-0"
+          >
             <div className="text-xs text-black/50 font-semibold">5 Aug</div>
             <div className="font-semibold mt-1">{t}</div>
           </div>
@@ -631,33 +706,42 @@ function ListBox({ title }: { title: string }) {
   );
 }
 
-function BlogCard({ title }: { title: string }) {
+function BlogCard({ title, href }: { title: string; href: string }) {
   return (
-    <div className="rounded-2xl border border-black/10 overflow-hidden bg-white hover:border-black/25 transition">
+    <Link
+      href={href}
+      className="rounded-2xl border border-black/10 overflow-hidden bg-white hover:border-black/25 transition block"
+    >
       <div className="h-40 bg-neutral-200" />
       <div className="p-6">
         <h3 className="font-black">{title}</h3>
         <p className="text-black/60 text-sm mt-2">
           Short guide to help you decide faster.
         </p>
-        <button className="mt-4 text-sm font-semibold underline underline-offset-4">
+        <span className="mt-4 inline-block text-sm font-semibold underline underline-offset-4">
           Read more
-        </button>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
 
-function FooterCol({ title, items }: { title: string; items: string[] }) {
+function FooterCol({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; href: string }[];
+}) {
   return (
     <div>
       <div className="font-black">{title}</div>
       <ul className="mt-3 space-y-2 text-black/60">
         {items.map((x) => (
-          <li key={x}>
-            <a className="hover:text-black" href="#">
-              {x}
-            </a>
+          <li key={x.href}>
+            <Link className="hover:text-black" href={x.href}>
+              {x.label}
+            </Link>
           </li>
         ))}
       </ul>
