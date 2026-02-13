@@ -361,6 +361,9 @@ export default function DeadlinesPage() {
                 ? "Today"
                 : `${s.days} day(s) left`;
 
+            const levelPart: string[] = x.level !== "Any" ? [x.level] : [];
+            const badges = levelPart.concat(x.tags.slice(0, 3));
+
             return (
               <article key={x.id} className="rounded-2xl border p-5 shadow-sm">
                 <div className="flex items-start justify-between gap-3">
@@ -389,13 +392,11 @@ export default function DeadlinesPage() {
                 </div>
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {(x.level !== "Any" ? [x.level] : [])
-                    .concat(x.tags.slice(0, 3))
-                    .map((t) => (
-                      <span key={t} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">
-                        {t}
-                      </span>
-                    ))}
+                  {badges.map((t) => (
+                    <span key={t} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">
+                      {t}
+                    </span>
+                  ))}
                 </div>
 
                 <p className="mt-3 text-sm text-slate-600">{x.note}</p>
